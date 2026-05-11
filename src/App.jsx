@@ -117,7 +117,6 @@ const certifications = [
     meta: "Cisco Networking Academy",
     icon: ShieldCheck,
   },
-  
 ];
 
 const education = [

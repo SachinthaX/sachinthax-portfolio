@@ -213,7 +213,7 @@ a {
 /* Shared sections */
 
 .section-shell {
-  padding: 96px 0;
+  padding: 76px 0;
 }
 
 .about-section {
@@ -243,9 +243,7 @@ a {
 }
 
 .muted-section {
-  background: rgba(255, 255, 255, 0.025);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  background: transparent;
 }
 
 /* Hero */
@@ -778,6 +776,17 @@ a {
   .certification-card {
     flex-direction: column;
   }
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+::selection {
+  background: rgba(125, 211, 252, 0.28);
+  color: var(--text);
 }
 
 /* Accessibility */
