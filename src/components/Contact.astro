@@ -1,0 +1,145 @@
+---
+import Icon from './Icon.astro';
+import type { Identity } from '../data/content';
+
+interface Props {
+  id: string;
+  eyebrow: string;
+  heading: string;
+  text: string;
+  identity: Identity;
+}
+
+const { id, eyebrow, heading, text, identity } = Astro.props;
+---
+
+<section id={id} class="section" aria-labelledby="contact-heading">
+  <div class="container">
+    <div class="card contact-card">
+      <div class="contact-copy">
+        <p class="eyebrow">{eyebrow}</p>
+        <h2 id="contact-heading" class="section-title">{heading}</h2>
+        <p class="contact-text prose">{text}</p>
+      </div>
+
+      <ul class="contact-list">
+        <li>
+          <a href={`mailto:${identity.email}`} class="contact-link">
+            <Icon name="mail" size={18} />
+            <span>{identity.email}</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href={identity.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-link"
+          >
+            <Icon name="github" size={18} />
+            <span>
+              github.com/{identity.handle}
+              <span class="sr-only"> (opens in a new tab)</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a
+            href={identity.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-link"
+          >
+            <Icon name="linkedin" size={18} />
+            <span>
+              linkedin.com/in/h-n-sachintha
+              <span class="sr-only"> (opens in a new tab)</span>
+            </span>
+          </a>
+        </li>
+        <li class="contact-location">
+          <span class="contact-location-label">Location:</span>{" "}
+          <span>{identity.location}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-8);
+  }
+
+  .contact-copy {
+    min-width: 0;
+  }
+
+  .contact-text {
+    margin-top: var(--space-4);
+    margin-bottom: 0;
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+
+  .contact-list {
+    display: grid;
+    gap: var(--space-3);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: 36px;
+    font-size: 0.9375rem;
+    color: var(--text);
+    overflow-wrap: anywhere;
+  }
+
+  .contact-link :global(svg) {
+    flex-shrink: 0;
+    color: var(--accent);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .contact-link {
+      transition: color 160ms ease;
+    }
+  }
+
+  @media (hover: hover) {
+    .contact-link:hover {
+      color: var(--accent);
+    }
+  }
+
+  .contact-location {
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  .contact-location-label {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  @media (max-width: 767px) {
+    .contact-card {
+      grid-template-columns: 1fr;
+      padding: var(--space-6);
+    }
+  }
+</style>

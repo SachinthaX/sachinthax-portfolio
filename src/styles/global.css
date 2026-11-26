@@ -241,16 +241,18 @@ html:not(.js) .js-only {
   }
 }
 
-.button-primary:hover {
-  background-color: var(--accent-hover);
-  border-color: var(--accent-hover);
-}
+@media (hover: hover) {
+  .button-primary:hover {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+  }
 
-.button-secondary:hover,
-.icon-button:hover {
-  background-color: var(--surface-hover);
-  border-color: var(--accent);
-  color: var(--accent);
+  .button-secondary:hover,
+  .icon-button:hover {
+    background-color: var(--surface-hover);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
 }
 
 /* Temporary Stage 2 placeholder markers */

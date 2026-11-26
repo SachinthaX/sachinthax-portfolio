@@ -149,8 +149,10 @@ const { brandName, brandHref = '#home', links } = Astro.props;
     }
   }
 
-  .nav-link:hover {
-    color: var(--text);
+  @media (hover: hover) {
+    .nav-link:hover {
+      color: var(--text);
+    }
   }
 
   .header-actions {

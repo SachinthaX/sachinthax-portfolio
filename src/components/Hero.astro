@@ -1,0 +1,287 @@
+---
+import { Picture } from 'astro:assets';
+import profilePhoto from '../assets/profile-photo.jpeg';
+import Icon from './Icon.astro';
+import type { CtaLink, Identity } from '../data/content';
+
+interface Props {
+  eyebrow: string;
+  headline: string;
+  subheading: string;
+  primaryCta: CtaLink;
+  cvCta: CtaLink;
+  showCv: boolean;
+  quickFacts: string[];
+  identity: Identity;
+}
+
+const {
+  eyebrow,
+  headline,
+  subheading,
+  primaryCta,
+  cvCta,
+  showCv,
+  quickFacts,
+  identity,
+} = Astro.props;
+---
+
+<section id="home" class="section hero-section" aria-labelledby="hero-heading">
+  <div class="container hero-grid">
+    <div class="hero-main">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1 id="hero-heading" class="hero-title">{headline}</h1>
+      <p class="hero-subheading">{subheading}</p>
+
+      <div class="hero-actions">
+        <div class="hero-buttons">
+          <a href={primaryCta.href} class="button button-primary">
+            {primaryCta.label}
+          </a>
+          {
+            showCv && (
+              <a href={cvCta.href} class="button button-secondary" download>
+                {cvCta.label}
+              </a>
+            )
+          }
+        </div>
+
+        <div class="hero-social" aria-label="Social and contact links">
+          <a
+            href={identity.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="icon-button"
+            aria-label="GitHub (opens in a new tab)"
+          >
+            <Icon name="github" size={18} />
+          </a>
+          <a
+            href={identity.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="icon-button"
+            aria-label="LinkedIn (opens in a new tab)"
+          >
+            <Icon name="linkedin" size={18} />
+          </a>
+          <a
+            href={`mailto:${identity.email}`}
+            class="icon-button"
+            aria-label={`Email ${identity.email}`}
+          >
+            <Icon name="mail" size={18} />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <aside class="card hero-card" aria-label="Profile overview">
+      <div class="hero-card-header">
+        <Picture
+          src={profilePhoto}
+          width={112}
+          height={112}
+          formats={['avif', 'webp']}
+          layout="fixed"
+          fit="cover"
+          position="attention"
+          priority
+          alt={`Portrait of ${identity.name}`}
+          class="hero-portrait"
+        />
+        <div class="hero-identity">
+          <p class="hero-name">{identity.name}</p>
+          <p class="hero-meta">{identity.descriptor}</p>
+          <p class="hero-location">{identity.location}</p>
+        </div>
+      </div>
+
+      <div class="hero-card-divider"></div>
+
+      <div class="hero-facts">
+        <p class="hero-facts-label">Focus</p>
+        <ul class="hero-facts-list">
+          {quickFacts.map((fact) => <li class="hero-fact">{fact}</li>)}
+        </ul>
+      </div>
+
+      <div class="hero-card-divider"></div>
+
+      <p class="hero-availability">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>{identity.availability}</span>
+      </p>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    padding-block: var(--space-16) var(--space-16);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    align-items: start;
+    gap: var(--space-8);
+  }
+
+  .hero-main {
+    min-width: 0;
+  }
+
+  .hero-title {
+    margin-bottom: var(--space-4);
+    font-size: clamp(2rem, 4.2vw, 3rem);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+  }
+
+  .hero-subheading {
+    max-width: 58ch;
+    margin-bottom: var(--space-6);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4) var(--space-6);
+  }
+
+  .hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .hero-social {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .hero-card {
+    display: grid;
+    gap: var(--space-4);
+    min-width: 0;
+  }
+
+  .hero-card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    min-width: 0;
+  }
+
+  .hero-portrait {
+    flex-shrink: 0;
+    width: 112px;
+    height: 112px;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--border);
+    object-fit: cover;
+    object-position: center 22%;
+  }
+
+  .hero-identity {
+    min-width: 0;
+  }
+
+  .hero-name {
+    margin-bottom: var(--space-1);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .hero-meta,
+  .hero-location {
+    margin-bottom: 0;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+
+  .hero-meta {
+    margin-bottom: var(--space-1);
+    color: var(--accent);
+  }
+
+  .hero-card-divider {
+    height: 1px;
+    background-color: var(--border);
+  }
+
+  .hero-facts-label {
+    margin-bottom: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .hero-facts-list {
+    display: grid;
+    gap: var(--space-2);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .hero-fact {
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-control);
+    background-color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--text);
+  }
+
+  .hero-availability {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    margin-bottom: 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  .status-dot {
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    margin-top: 0.42rem;
+    border-radius: var(--radius-pill);
+    background-color: var(--accent);
+  }
+
+  @media (max-width: 840px) {
+    .hero-section {
+      padding-block: var(--space-12);
+    }
+
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .hero-card-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

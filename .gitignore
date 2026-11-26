@@ -29,5 +29,8 @@ dist-ssr/
 .DS_Store
 Thumbs.db
 
+# Local docs (ignored from commits)
+docs/
+
 # Misc
 *.local

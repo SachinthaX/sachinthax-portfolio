@@ -1,0 +1,87 @@
+---
+import type { ProjectItem } from '../data/content';
+
+interface Props {
+  id: string;
+  eyebrow: string;
+  heading: string;
+  items: ProjectItem[];
+}
+
+const { id, eyebrow, heading, items } = Astro.props;
+---
+
+<section id={id} class="section" aria-labelledby="projects-heading">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow">{eyebrow}</p>
+      <h2 id="projects-heading" class="section-title">{heading}</h2>
+    </div>
+
+    <div class="projects-grid">
+      {
+        items.map((project) => (
+          <article class="card card-interactive project-card">
+            <p class="project-subtitle">{project.subtitle}</p>
+            <h3 class="project-title">{project.title}</h3>
+            <p class="project-description">{project.description}</p>
+            <ul class="chip-list" aria-label={`Technologies used in ${project.title}`}>
+              {project.tech.map((tag) => <li class="chip">{tag}</li>)}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .project-subtitle {
+    margin-bottom: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .project-title {
+    margin-bottom: var(--space-3);
+    font-size: 1.1875rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .project-description {
+    margin-bottom: var(--space-6);
+    font-size: 0.96875rem;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+
+  .chip-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+    margin: auto 0 0;
+    padding: 0;
+  }
+
+  @media (max-width: 767px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

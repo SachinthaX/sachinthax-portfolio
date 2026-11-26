@@ -124,9 +124,20 @@ export const hero = {
   ],
 };
 
+export const sectionHeaders = {
+  about: { eyebrow: 'About', heading: 'About' },
+  experience: { eyebrow: 'Experience', heading: 'Experience' },
+  projects: { eyebrow: 'Projects', heading: 'Projects' },
+  skills: { eyebrow: 'Skills', heading: 'Skills' },
+  credentials: {
+    eyebrow: 'Credentials',
+    heading: 'Certifications and Education',
+  },
+} as const;
+
 export const about = {
-  eyebrow: 'About',
-  heading: 'About me',
+  eyebrow: sectionHeaders.about.eyebrow,
+  heading: sectionHeaders.about.heading,
   paragraphs: [
     "I'm an Information Technology graduate based in Sri Lanka. I enjoy building web applications and solving technical problems, from writing the code to deploying and maintaining it.",
     'My work covers full-stack development with modern tools such as Next.js, React, Node.js, FastAPI, and Spring Boot. I have also set up production environments, built CI/CD pipelines, and fixed issues in live applications.',
