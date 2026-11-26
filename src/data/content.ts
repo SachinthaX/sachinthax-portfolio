@@ -2,7 +2,7 @@ export const SHOW_CV = false;
 
 export interface NavLink {
   label: string;
-  href: `#${string}`;
+  href: string;
 }
 
 export interface CtaLink {
@@ -23,7 +23,7 @@ export interface Identity {
   availability: string;
 }
 
-export interface SiteMeta {
+interface SiteMeta {
   title: string;
   description: string;
   canonical: string;
@@ -45,8 +45,6 @@ export interface ProjectItem {
   subtitle: string;
   description: string;
   tech: string[];
-  repoUrl?: string;
-  demoUrl?: string;
 }
 
 export interface SkillGroup {

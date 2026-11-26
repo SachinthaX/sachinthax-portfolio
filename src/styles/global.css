@@ -254,22 +254,3 @@ html:not(.js) .js-only {
     color: var(--accent);
   }
 }
-
-/* Temporary Stage 2 placeholder markers */
-.stage-placeholder {
-  border: 1px dashed var(--border-control);
-  border-radius: var(--radius-card);
-  padding: var(--space-6);
-  background-color: var(--surface);
-  color: var(--muted);
-}
-
-.stage-placeholder h1,
-.stage-placeholder h2 {
-  color: var(--text);
-  margin-bottom: var(--space-2);
-}
-
-.stage-placeholder p:last-child {
-  margin-bottom: 0;
-}

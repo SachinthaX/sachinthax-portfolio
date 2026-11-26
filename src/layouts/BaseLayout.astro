@@ -5,9 +5,9 @@ import interLatinWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-n
 import jetbrainsMonoLatinWoff2 from '@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2?url';
 import '../styles/tokens.css';
 import '../styles/global.css';
-import Navbar, { type NavLink } from '../components/Navbar.astro';
+import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
-import { identity, navigation, siteMeta } from '../data/content';
+import { identity, navigation, siteMeta, type NavLink } from '../data/content';
 
 interface Props {
   title?: string;
