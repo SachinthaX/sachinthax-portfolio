@@ -69,11 +69,6 @@ src/
 
 All copy, links, experience entries, projects, skills, certifications, education, and SEO metadata live in `src/data/content.ts`.
 
-### Enabling the CV Download Button
-
-1. Place a public CV PDF (without a phone number or references) at `public/Nipuna-Sachintha-CV.pdf`.
-2. Change `SHOW_CV = false` to `SHOW_CV = true` in `src/data/content.ts`.
-
 ## Contact
 
 - Email: nipunasachintha77@gmail.com
