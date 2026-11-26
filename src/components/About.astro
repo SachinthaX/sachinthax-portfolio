@@ -22,10 +22,23 @@ const { id, eyebrow, heading, paragraphs, languages } = Astro.props;
     <div class="prose about-body">
       {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
 
-      <p class="about-languages">
+      <div class="about-languages">
         <span class="about-languages-label">Languages:</span>{" "}
-        {languages.map((lang) => `${lang.name}: ${lang.level}`).join(' · ')}
-      </p>
+        <ul class="about-languages-list">
+          {
+            languages.map((lang, index) => (
+              <li class="about-language-item">
+                {index > 0 && (
+                  <span class="about-language-sep" aria-hidden="true">
+                    {" · "}
+                  </span>
+                )}
+                <span>{`${lang.name}: ${lang.level}`}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -43,7 +56,11 @@ const { id, eyebrow, heading, paragraphs, languages } = Astro.props;
     color: var(--muted);
   }
 
-  .about-body .about-languages {
+  .about-languages {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-1) var(--space-2);
     margin-top: var(--space-2);
     padding-top: var(--space-4);
     border-top: 1px solid var(--border);
@@ -56,5 +73,37 @@ const { id, eyebrow, heading, paragraphs, languages } = Astro.props;
   .about-languages-label {
     color: var(--accent);
     font-weight: 600;
+  }
+
+  .about-languages-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-2);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .about-language-item {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--space-2);
+  }
+
+  @media (max-width: 640px) {
+    .about-languages {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-1);
+    }
+
+    .about-languages-list {
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+
+    .about-language-sep {
+      display: none;
+    }
   }
 </style>

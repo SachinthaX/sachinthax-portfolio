@@ -25,13 +25,21 @@ const {
   quickFacts,
   identity,
 } = Astro.props;
+
+const greetingPrefix = "Hi, I'm Nipuna Sachintha.";
+const hasGreetingSplit = headline.startsWith(`${greetingPrefix} `);
+const greetingLine = hasGreetingSplit ? greetingPrefix : headline;
+const restLine = hasGreetingSplit ? headline.slice(greetingPrefix.length + 1) : '';
 ---
 
 <section id="home" class="section hero-section" aria-labelledby="hero-heading">
   <div class="container hero-grid">
     <div class="hero-main">
       <p class="eyebrow">{eyebrow}</p>
-      <h1 id="hero-heading" class="hero-title">{headline}</h1>
+      <h1 id="hero-heading" class="hero-title">
+        <span class="hero-greeting">{greetingLine}</span>
+        {restLine && <span class="hero-rest">{" "}{restLine}</span>}
+      </h1>
       <p class="hero-subheading">{subheading}</p>
 
       <div class="hero-actions">
@@ -136,10 +144,19 @@ const {
 
   .hero-title {
     margin-bottom: var(--space-4);
-    font-size: clamp(2rem, 4.2vw, 3rem);
+    font-size: clamp(2.125rem, 3.5vw, 2.85rem);
     font-weight: 700;
-    line-height: 1.12;
+    line-height: 1.14;
     letter-spacing: -0.03em;
+  }
+
+  .hero-greeting {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .hero-rest {
+    display: block;
   }
 
   .hero-subheading {
@@ -275,6 +292,10 @@ const {
 
     .hero-grid {
       grid-template-columns: 1fr;
+    }
+
+    .hero-title {
+      font-size: clamp(1.45rem, 6vw, 2.5rem);
     }
   }
 
