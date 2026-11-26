@@ -5,4 +5,5 @@ export default defineConfig({
   site: 'https://www.sachinthax.live',
   output: 'static',
   trailingSlash: 'ignore',
+  compressHTML: true,
 });
