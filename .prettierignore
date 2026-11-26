@@ -1,0 +1,9 @@
+.astro/
+dist/
+docs/
+node_modules/
+package-lock.json
+public/favicon.svg
+public/og-image.png
+public/robots.txt
+public/sitemap.xml

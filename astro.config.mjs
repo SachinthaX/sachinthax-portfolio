@@ -1,9 +1,9 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  site: 'https://www.sachinthax.live',
-  output: 'static',
-  trailingSlash: 'ignore',
+  site: "https://www.sachinthax.live",
+  output: "static",
+  trailingSlash: "ignore",
   compressHTML: true,
 });

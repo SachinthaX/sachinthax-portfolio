@@ -1,13 +1,13 @@
 ---
-import '@fontsource-variable/inter';
-import '@fontsource-variable/jetbrains-mono';
-import interLatinWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
-import jetbrainsMonoLatinWoff2 from '@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2?url';
-import '../styles/tokens.css';
-import '../styles/global.css';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
-import { identity, navigation, siteMeta, type NavLink } from '../data/content';
+import "@fontsource-variable/inter";
+import "@fontsource-variable/jetbrains-mono";
+import interLatinWoff2 from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
+import jetbrainsMonoLatinWoff2 from "@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2?url";
+import "../styles/tokens.css";
+import "../styles/global.css";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import { identity, navigation, siteMeta, type NavLink } from "../data/content";
 
 interface Props {
   title?: string;
@@ -29,28 +29,30 @@ const {
   ogImageAlt = siteMeta.ogImageAlt,
   noindex = false,
   includePersonSchema = true,
-  brandHref = '#home',
+  brandHref = "#home",
   navLinks = navigation,
 } = Astro.props;
 
-const absoluteOgImage = ogImage.startsWith('http')
+const absoluteOgImage = ogImage.startsWith("http")
   ? ogImage
   : new URL(ogImage, siteMeta.canonical).toString();
 
-const [locality, countryName] = identity.location.split(',').map((s) => s.trim());
+const [locality, countryName] = identity.location
+  .split(",")
+  .map((s) => s.trim());
 
 const personSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
+  "@context": "https://schema.org",
+  "@type": "Person",
   name: identity.name,
   alternateName: identity.handle,
   jobTitle: identity.role,
   url: identity.siteUrl,
   email: `mailto:${identity.email}`,
   address: {
-    '@type': 'PostalAddress',
+    "@type": "PostalAddress",
     addressLocality: locality,
-    addressCountry: countryName === 'Sri Lanka' ? 'LK' : countryName,
+    addressCountry: countryName === "Sri Lanka" ? "LK" : countryName,
   },
   sameAs: [identity.github, identity.linkedin],
 };
@@ -66,20 +68,20 @@ const personSchema = {
     <script is:inline>
       (() => {
         const root = document.documentElement;
-        root.classList.add('js');
+        root.classList.add("js");
         let theme = null;
         try {
-          const saved = localStorage.getItem('theme');
-          if (saved === 'dark' || saved === 'light') {
+          const saved = localStorage.getItem("theme");
+          if (saved === "dark" || saved === "light") {
             theme = saved;
           }
         } catch {
           // Ignore storage access errors
         }
         if (!theme) {
-          theme = window.matchMedia('(prefers-color-scheme: light)').matches
-            ? 'light'
-            : 'dark';
+          theme = window.matchMedia("(prefers-color-scheme: light)").matches
+            ? "light"
+            : "dark";
         }
         root.dataset.theme = theme;
       })();
@@ -123,17 +125,17 @@ const personSchema = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={absoluteOgImage} />
 
-    {
-      includePersonSchema && (
-        <script
-          type="application/ld+json"
-          set:html={JSON.stringify(personSchema)}
-        />
-      )
-    }
+    {includePersonSchema && (
+      <script
+        type="application/ld+json"
+        set:html={JSON.stringify(personSchema)}
+      />
+    )}
   </head>
   <body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#main-content" class="skip-link">
+      Skip to main content
+    </a>
 
     <Navbar brandName={identity.name} brandHref={brandHref} links={navLinks} />
 

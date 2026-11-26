@@ -1,5 +1,5 @@
 ---
-import type { LanguageItem } from '../data/content';
+import type { LanguageItem } from "../data/content";
 
 interface Props {
   id: string;
@@ -16,27 +16,29 @@ const { id, eyebrow, heading, paragraphs, languages } = Astro.props;
   <div class="container">
     <div class="section-header">
       <p class="eyebrow">{eyebrow}</p>
-      <h2 id="about-heading" class="section-title">{heading}</h2>
+      <h2 id="about-heading" class="section-title">
+        {heading}
+      </h2>
     </div>
 
     <div class="prose about-body">
-      {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      {paragraphs.map((paragraph) => (
+        <p>{paragraph}</p>
+      ))}
 
       <div class="about-languages">
         <span class="about-languages-label">Languages:</span>{" "}
         <ul class="about-languages-list">
-          {
-            languages.map((lang, index) => (
-              <li class="about-language-item">
-                {index > 0 && (
-                  <span class="about-language-sep" aria-hidden="true">
-                    {" · "}
-                  </span>
-                )}
-                <span>{`${lang.name}: ${lang.level}`}</span>
-              </li>
-            ))
-          }
+          {languages.map((lang, index) => (
+            <li class="about-language-item">
+              {index > 0 && (
+                <span class="about-language-sep" aria-hidden="true">
+                  {" · "}
+                </span>
+              )}
+              <span>{`${lang.name}: ${lang.level}`}</span>
+            </li>
+          ))}
         </ul>
       </div>
     </div>

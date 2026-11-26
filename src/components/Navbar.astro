@@ -1,6 +1,6 @@
 ---
-import Icon from './Icon.astro';
-import type { NavLink } from '../data/content';
+import Icon from "./Icon.astro";
+import type { NavLink } from "../data/content";
 
 interface Props {
   brandName: string;
@@ -8,27 +8,27 @@ interface Props {
   links: NavLink[];
 }
 
-const { brandName, brandHref = '#home', links } = Astro.props;
+const { brandName, brandHref = "#home", links } = Astro.props;
 ---
 
 <header class="site-header">
   <div class="container header-inner">
     <a href={brandHref} class="brand">
-      <span class="brand-mark" aria-hidden="true">NS</span>
+      <span class="brand-mark" aria-hidden="true">
+        NS
+      </span>
       <span class="brand-name">{brandName}</span>
     </a>
 
     <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">
       <ul class="nav-list">
-        {
-          links.map((item) => (
-            <li>
-              <a href={item.href} class="nav-link">
-                {item.label}
-              </a>
-            </li>
-          ))
-        }
+        {links.map((item) => (
+          <li>
+            <a href={item.href} class="nav-link">
+              {item.label}
+            </a>
+          </li>
+        ))}
       </ul>
     </nav>
 
@@ -244,88 +244,97 @@ const { brandName, brandHref = '#home', links } = Astro.props;
 </style>
 
 <script>
-  const header = document.querySelector<HTMLElement>('.site-header');
-  const nav = document.getElementById('primary-nav');
-  const menuToggle = document.getElementById('menu-toggle') as HTMLButtonElement | null;
-  const themeToggle = document.getElementById('theme-toggle') as HTMLButtonElement | null;
-  const themeMeta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+  const header = document.querySelector<HTMLElement>(".site-header");
+  const nav = document.getElementById("primary-nav");
+  const menuToggle = document.getElementById(
+    "menu-toggle",
+  ) as HTMLButtonElement | null;
+  const themeToggle = document.getElementById(
+    "theme-toggle",
+  ) as HTMLButtonElement | null;
+  const themeMeta = document.querySelector<HTMLMetaElement>(
+    'meta[name="theme-color"]',
+  );
 
-  const syncThemeUI = (theme: 'dark' | 'light') => {
+  const syncThemeUI = (theme: "dark" | "light") => {
     document.documentElement.dataset.theme = theme;
     if (themeMeta) {
-      themeMeta.setAttribute('content', theme === 'light' ? '#fafbfc' : '#0b0f14');
+      themeMeta.setAttribute(
+        "content",
+        theme === "light" ? "#fafbfc" : "#0b0f14",
+      );
     }
     if (themeToggle) {
-      const isLight = theme === 'light';
-      themeToggle.setAttribute('aria-pressed', String(isLight));
+      const isLight = theme === "light";
+      themeToggle.setAttribute("aria-pressed", String(isLight));
       themeToggle.setAttribute(
-        'aria-label',
-        isLight ? 'Switch to dark theme' : 'Switch to light theme'
+        "aria-label",
+        isLight ? "Switch to dark theme" : "Switch to light theme",
       );
     }
   };
 
-  const getCurrentTheme = (): 'dark' | 'light' =>
-    document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+  const getCurrentTheme = (): "dark" | "light" =>
+    document.documentElement.dataset.theme === "light" ? "light" : "dark";
 
   syncThemeUI(getCurrentTheme());
 
-  themeToggle?.addEventListener('click', () => {
-    const nextTheme = getCurrentTheme() === 'dark' ? 'light' : 'dark';
+  themeToggle?.addEventListener("click", () => {
+    const nextTheme = getCurrentTheme() === "dark" ? "light" : "dark";
     try {
-      localStorage.setItem('theme', nextTheme);
+      localStorage.setItem("theme", nextTheme);
     } catch {
       // Ignore storage errors when blocked by browser privacy settings
     }
     syncThemeUI(nextTheme);
   });
 
-  const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: light)');
-  colorSchemeQuery.addEventListener('change', (event) => {
+  const colorSchemeQuery = window.matchMedia("(prefers-color-scheme: light)");
+  colorSchemeQuery.addEventListener("change", (event) => {
     try {
-      if (localStorage.getItem('theme')) return;
+      if (localStorage.getItem("theme")) return;
     } catch {
       // Ignore storage read errors
     }
-    syncThemeUI(event.matches ? 'light' : 'dark');
+    syncThemeUI(event.matches ? "light" : "dark");
   });
 
   const setMenuOpen = (open: boolean, restoreFocus = false) => {
     if (!nav || !menuToggle) return;
-    nav.classList.toggle('is-open', open);
-    menuToggle.setAttribute('aria-expanded', String(open));
+    nav.classList.toggle("is-open", open);
+    menuToggle.setAttribute("aria-expanded", String(open));
     menuToggle.setAttribute(
-      'aria-label',
-      open ? 'Close navigation menu' : 'Open navigation menu'
+      "aria-label",
+      open ? "Close navigation menu" : "Open navigation menu",
     );
     if (!open && restoreFocus) {
       menuToggle.focus();
     }
   };
 
-  menuToggle?.addEventListener('click', () => {
-    const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+  menuToggle?.addEventListener("click", () => {
+    const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
     setMenuOpen(!isOpen);
   });
 
-  nav?.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
+  nav?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
       setMenuOpen(false);
     });
   });
 
-  document.addEventListener('keydown', (event) => {
+  document.addEventListener("keydown", (event) => {
     if (
-      event.key === 'Escape' &&
-      menuToggle?.getAttribute('aria-expanded') === 'true'
+      event.key === "Escape" &&
+      menuToggle?.getAttribute("aria-expanded") === "true"
     ) {
       setMenuOpen(false, true);
     }
   });
 
-  document.addEventListener('click', (event) => {
+  document.addEventListener("click", (event) => {
     if (
-      menuToggle?.getAttribute('aria-expanded') === 'true' &&
+      menuToggle?.getAttribute("aria-expanded") === "true" &&
       header &&
       event.target instanceof Node &&
       !header.contains(event.target)
@@ -334,9 +343,9 @@ const { brandName, brandHref = '#home', links } = Astro.props;
     }
   });
 
-  const desktopQuery = window.matchMedia('(min-width: 768px)');
-  desktopQuery.addEventListener('change', (event) => {
-    if (event.matches && menuToggle?.getAttribute('aria-expanded') === 'true') {
+  const desktopQuery = window.matchMedia("(min-width: 768px)");
+  desktopQuery.addEventListener("change", (event) => {
+    if (event.matches && menuToggle?.getAttribute("aria-expanded") === "true") {
       setMenuOpen(false);
     }
   });

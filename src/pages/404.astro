@@ -1,6 +1,6 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { identity, navigation, siteMeta } from '../data/content';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { identity, navigation, siteMeta } from "../data/content";
 
 const rootLinks = navigation.map((item) => ({
   label: item.label,
@@ -17,15 +17,22 @@ const rootLinks = navigation.map((item) => ({
   brandHref="/"
   navLinks={rootLinks}
 >
-  <section class="section not-found-section" aria-labelledby="not-found-heading">
+  <section
+    class="section not-found-section"
+    aria-labelledby="not-found-heading"
+  >
     <div class="container">
       <div class="card prose not-found-card">
         <p class="eyebrow">404</p>
-        <h1 id="not-found-heading" class="not-found-title">Page not found</h1>
+        <h1 id="not-found-heading" class="not-found-title">
+          Page not found
+        </h1>
         <p class="not-found-text">
           The page you are looking for does not exist or may have moved.
         </p>
-        <a href="/" class="button button-primary">Back to home</a>
+        <a href="/" class="button button-primary">
+          Back to home
+        </a>
       </div>
     </div>
   </section>

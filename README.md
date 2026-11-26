@@ -4,7 +4,7 @@ Personal portfolio website built with Astro, TypeScript, and plain CSS.
 
 ## Live Website
 
-https://www.sachinthax.live/
+<https://www.sachinthax.live/>
 
 ## Tech Stack
 
@@ -25,10 +25,13 @@ https://www.sachinthax.live/
 git clone https://github.com/SachinthaX/sachinthax-portfolio.git
 cd sachinthax-portfolio
 npm install
-npm run dev      # Start local dev server
-npm run check    # Run Astro & TypeScript diagnostics
-npm run build    # Build static site to dist/
-npm run preview  # Preview dist/ locally
+npm run dev          # Start local dev server
+npm run check        # Run Astro & TypeScript diagnostics
+npm run lint         # Run ESLint
+npm run format:check # Check Prettier formatting
+npm run format       # Format codebase with Prettier
+npm run build        # Build static site to dist/
+npm run preview      # Preview dist/ locally
 ```
 
 ## Project Structure
@@ -67,10 +70,11 @@ src/
 
 ## Editing Content
 
-All copy, links, experience entries, projects, skills, certifications, education, and SEO metadata live in `src/data/content.ts`.
+All copy, links, experience entries, projects, skills, certifications,
+education, and SEO metadata live in `src/data/content.ts`.
 
 ## Contact
 
-- Email: nipunasachintha77@gmail.com
-- GitHub: https://github.com/SachinthaX
-- LinkedIn: https://www.linkedin.com/in/h-n-sachintha/
+- Email: <nipunasachintha77@gmail.com>
+- GitHub: <https://github.com/SachinthaX>
+- LinkedIn: <https://www.linkedin.com/in/h-n-sachintha/>

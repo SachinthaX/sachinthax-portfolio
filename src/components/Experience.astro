@@ -1,5 +1,5 @@
 ---
-import type { ExperienceItem } from '../data/content';
+import type { ExperienceItem } from "../data/content";
 
 interface Props {
   id: string;
@@ -15,28 +15,30 @@ const { id, eyebrow, heading, items } = Astro.props;
   <div class="container">
     <div class="section-header">
       <p class="eyebrow">{eyebrow}</p>
-      <h2 id="experience-heading" class="section-title">{heading}</h2>
+      <h2 id="experience-heading" class="section-title">
+        {heading}
+      </h2>
     </div>
 
     <div class="timeline">
-      {
-        items.map((item) => (
-          <article class="card timeline-card">
-            <span class="timeline-marker" aria-hidden="true"></span>
-            <div class="timeline-header">
-              <div>
-                <h3 class="timeline-role">{item.role}</h3>
-                <p class="timeline-company">{item.company}</p>
-              </div>
-              <span class="chip timeline-period">{item.period}</span>
+      {items.map((item) => (
+        <article class="card timeline-card">
+          <span class="timeline-marker" aria-hidden="true"></span>
+          <div class="timeline-header">
+            <div>
+              <h3 class="timeline-role">{item.role}</h3>
+              <p class="timeline-company">{item.company}</p>
             </div>
+            <span class="chip timeline-period">{item.period}</span>
+          </div>
 
-            <ul class="timeline-bullets prose">
-              {item.bullets.map((bullet) => <li>{bullet}</li>)}
-            </ul>
-          </article>
-        ))
-      }
+          <ul class="timeline-bullets prose">
+            {item.bullets.map((bullet) => (
+              <li>{bullet}</li>
+            ))}
+          </ul>
+        </article>
+      ))}
     </div>
   </div>
 </section>

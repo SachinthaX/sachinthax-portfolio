@@ -1,8 +1,8 @@
 ---
-import { Picture } from 'astro:assets';
-import profilePhoto from '../assets/profile-photo.jpeg';
-import Icon from './Icon.astro';
-import type { CtaLink, Identity } from '../data/content';
+import { Picture } from "astro:assets";
+import profilePhoto from "../assets/profile-photo.jpeg";
+import Icon from "./Icon.astro";
+import type { CtaLink, Identity } from "../data/content";
 
 interface Props {
   eyebrow: string;
@@ -29,7 +29,9 @@ const {
 const greetingPrefix = "Hi, I'm Nipuna Sachintha.";
 const hasGreetingSplit = headline.startsWith(`${greetingPrefix} `);
 const greetingLine = hasGreetingSplit ? greetingPrefix : headline;
-const restLine = hasGreetingSplit ? headline.slice(greetingPrefix.length + 1) : '';
+const restLine = hasGreetingSplit
+  ? headline.slice(greetingPrefix.length + 1)
+  : "";
 ---
 
 <section id="home" class="section hero-section" aria-labelledby="hero-heading">
@@ -38,7 +40,7 @@ const restLine = hasGreetingSplit ? headline.slice(greetingPrefix.length + 1) : 
       <p class="eyebrow">{eyebrow}</p>
       <h1 id="hero-heading" class="hero-title">
         <span class="hero-greeting">{greetingLine}</span>
-        {restLine && <span class="hero-rest">{" "}{restLine}</span>}
+        {restLine && <span class="hero-rest"> {restLine}</span>}
       </h1>
       <p class="hero-subheading">{subheading}</p>
 
@@ -47,13 +49,11 @@ const restLine = hasGreetingSplit ? headline.slice(greetingPrefix.length + 1) : 
           <a href={primaryCta.href} class="button button-primary">
             {primaryCta.label}
           </a>
-          {
-            showCv && (
-              <a href={cvCta.href} class="button button-secondary" download>
-                {cvCta.label}
-              </a>
-            )
-          }
+          {showCv && (
+            <a href={cvCta.href} class="button button-secondary" download>
+              {cvCta.label}
+            </a>
+          )}
         </div>
 
         <div class="hero-social" aria-label="Social and contact links">
@@ -92,7 +92,7 @@ const restLine = hasGreetingSplit ? headline.slice(greetingPrefix.length + 1) : 
           src={profilePhoto}
           width={112}
           height={112}
-          formats={['avif', 'webp']}
+          formats={["avif", "webp"]}
           layout="fixed"
           fit="cover"
           position="attention"
@@ -112,7 +112,9 @@ const restLine = hasGreetingSplit ? headline.slice(greetingPrefix.length + 1) : 
       <div class="hero-facts">
         <p class="hero-facts-label">Focus</p>
         <ul class="hero-facts-list">
-          {quickFacts.map((fact) => <li class="hero-fact">{fact}</li>)}
+          {quickFacts.map((fact) => (
+            <li class="hero-fact">{fact}</li>
+          ))}
         </ul>
       </div>
 

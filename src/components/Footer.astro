@@ -9,7 +9,9 @@ const currentYear = new Date().getFullYear();
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p>© {currentYear} {ownerName}</p>
+    <p>
+      © {currentYear} {ownerName}
+    </p>
   </div>
 </footer>
 
@@ -22,8 +24,9 @@ const currentYear = new Date().getFullYear();
   .footer-inner {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: var(--space-4);
+    text-align: center;
   }
 
   .footer-inner p {
