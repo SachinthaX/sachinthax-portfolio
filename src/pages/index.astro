@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Experience from '../components/Experience.astro';
+import Projects from '../components/Projects.astro';
+import Skills from '../components/Skills.astro';
+import Credentials from '../components/Credentials.astro';
+import Contact from '../components/Contact.astro';
+import {
+  SHOW_CV,
+  about,
+  certifications,
+  contact,
+  education,
+  experience,
+  hero,
+  identity,
+  projects,
+  sectionHeaders,
+  skillGroups,
+} from '../data/content';
+---
+
+<BaseLayout>
+  <Hero
+    eyebrow={hero.eyebrow}
+    headline={hero.headline}
+    subheading={hero.subheading}
+    primaryCta={hero.primaryCta}
+    cvCta={hero.cvCta}
+    showCv={SHOW_CV}
+    quickFacts={hero.quickFacts}
+    identity={identity}
+  />
+
+  <About
+    id="about"
+    eyebrow={about.eyebrow}
+    heading={about.heading}
+    paragraphs={about.paragraphs}
+    languages={about.languages}
+  />
+
+  <Experience
+    id="experience"
+    eyebrow={sectionHeaders.experience.eyebrow}
+    heading={sectionHeaders.experience.heading}
+    items={experience}
+  />
+
+  <Projects
+    id="projects"
+    eyebrow={sectionHeaders.projects.eyebrow}
+    heading={sectionHeaders.projects.heading}
+    items={projects}
+  />
+
+  <Skills
+    id="skills"
+    eyebrow={sectionHeaders.skills.eyebrow}
+    heading={sectionHeaders.skills.heading}
+    groups={skillGroups}
+  />
+
+  <Credentials
+    id="credentials"
+    eyebrow={sectionHeaders.credentials.eyebrow}
+    heading={sectionHeaders.credentials.heading}
+    certifications={certifications}
+    education={education}
+  />
+
+  <Contact
+    id="contact"
+    eyebrow={contact.eyebrow}
+    heading={contact.heading}
+    text={contact.text}
+    identity={identity}
+  />
+</BaseLayout>

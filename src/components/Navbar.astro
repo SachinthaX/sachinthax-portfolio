@@ -1,0 +1,343 @@
+---
+import Icon from './Icon.astro';
+import type { NavLink } from '../data/content';
+
+interface Props {
+  brandName: string;
+  brandHref?: string;
+  links: NavLink[];
+}
+
+const { brandName, brandHref = '#home', links } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href={brandHref} class="brand">
+      <span class="brand-mark" aria-hidden="true">NS</span>
+      <span class="brand-name">{brandName}</span>
+    </a>
+
+    <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">
+      <ul class="nav-list">
+        {
+          links.map((item) => (
+            <li>
+              <a href={item.href} class="nav-link">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="header-actions js-only">
+      <button
+        type="button"
+        id="theme-toggle"
+        class="icon-button theme-toggle"
+        aria-pressed="false"
+        aria-label="Switch to light theme"
+      >
+        <span class="theme-icon theme-icon-sun">
+          <Icon name="sun" size={18} />
+        </span>
+        <span class="theme-icon theme-icon-moon">
+          <Icon name="moon" size={18} />
+        </span>
+      </button>
+
+      <button
+        type="button"
+        id="menu-toggle"
+        class="icon-button menu-toggle"
+        aria-expanded="false"
+        aria-controls="primary-nav"
+        aria-label="Open navigation menu"
+      >
+        <span class="menu-icon menu-icon-open">
+          <Icon name="menu" size={18} />
+        </span>
+        <span class="menu-icon menu-icon-close">
+          <Icon name="close" size={18} />
+        </span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    min-height: var(--nav-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    padding-block: var(--space-2);
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  .brand-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-control);
+    background-color: var(--surface);
+    border: 1px solid var(--border-control);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .brand-name {
+    font-size: 0.9375rem;
+  }
+
+  .primary-nav {
+    margin-left: auto;
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-4);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    padding-inline: var(--space-1);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .nav-link {
+      transition: color 150ms ease;
+    }
+  }
+
+  @media (hover: hover) {
+    .nav-link:hover {
+      color: var(--text);
+    }
+  }
+
+  .header-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  /* Theme toggle icon visibility */
+  .theme-icon {
+    display: none;
+  }
+
+  :global([data-theme="dark"]) .theme-icon-sun,
+  :global(:root:not([data-theme="light"])) .theme-icon-sun {
+    display: inline-flex;
+  }
+
+  :global([data-theme="light"]) .theme-icon-moon {
+    display: inline-flex;
+  }
+
+  /* Desktop: menu toggle hidden */
+  .menu-toggle {
+    display: none;
+  }
+
+  .menu-icon-close {
+    display: none;
+  }
+
+  .menu-toggle[aria-expanded="true"] .menu-icon-open {
+    display: none;
+  }
+
+  .menu-toggle[aria-expanded="true"] .menu-icon-close {
+    display: inline-flex;
+  }
+
+  /* Without JS: keep nav links visible and wrap cleanly across viewports */
+  :global(html:not(.js)) .header-inner {
+    row-gap: var(--space-2);
+  }
+
+  :global(html:not(.js)) .primary-nav {
+    margin-left: 0;
+  }
+
+  /* Mobile menu collapse ONLY when JS is active */
+  @media (max-width: 767px) {
+    :global(html.js) .header-inner {
+      flex-wrap: nowrap;
+      padding-block: 0;
+    }
+
+    :global(html.js) .menu-toggle {
+      display: inline-flex;
+    }
+
+    :global(html.js) .primary-nav {
+      position: absolute;
+      top: calc(100% + 1px);
+      left: 0;
+      right: 0;
+      margin-left: 0;
+      display: none;
+      background-color: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: var(--space-3) var(--space-4) var(--space-4);
+    }
+
+    :global(html.js) .primary-nav.is-open {
+      display: block;
+    }
+
+    :global(html.js) .nav-list {
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-1);
+    }
+
+    :global(html.js) .nav-link {
+      width: 100%;
+      min-height: 44px;
+      padding-inline: var(--space-3);
+      border-radius: var(--radius-control);
+    }
+
+    :global(html.js) .nav-link:hover {
+      background-color: var(--surface);
+    }
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('.site-header');
+  const nav = document.getElementById('primary-nav');
+  const menuToggle = document.getElementById('menu-toggle') as HTMLButtonElement | null;
+  const themeToggle = document.getElementById('theme-toggle') as HTMLButtonElement | null;
+  const themeMeta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+
+  const syncThemeUI = (theme: 'dark' | 'light') => {
+    document.documentElement.dataset.theme = theme;
+    if (themeMeta) {
+      themeMeta.setAttribute('content', theme === 'light' ? '#fafbfc' : '#0b0f14');
+    }
+    if (themeToggle) {
+      const isLight = theme === 'light';
+      themeToggle.setAttribute('aria-pressed', String(isLight));
+      themeToggle.setAttribute(
+        'aria-label',
+        isLight ? 'Switch to dark theme' : 'Switch to light theme'
+      );
+    }
+  };
+
+  const getCurrentTheme = (): 'dark' | 'light' =>
+    document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+
+  syncThemeUI(getCurrentTheme());
+
+  themeToggle?.addEventListener('click', () => {
+    const nextTheme = getCurrentTheme() === 'dark' ? 'light' : 'dark';
+    try {
+      localStorage.setItem('theme', nextTheme);
+    } catch {
+      // Ignore storage errors when blocked by browser privacy settings
+    }
+    syncThemeUI(nextTheme);
+  });
+
+  const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: light)');
+  colorSchemeQuery.addEventListener('change', (event) => {
+    try {
+      if (localStorage.getItem('theme')) return;
+    } catch {
+      // Ignore storage read errors
+    }
+    syncThemeUI(event.matches ? 'light' : 'dark');
+  });
+
+  const setMenuOpen = (open: boolean, restoreFocus = false) => {
+    if (!nav || !menuToggle) return;
+    nav.classList.toggle('is-open', open);
+    menuToggle.setAttribute('aria-expanded', String(open));
+    menuToggle.setAttribute(
+      'aria-label',
+      open ? 'Close navigation menu' : 'Open navigation menu'
+    );
+    if (!open && restoreFocus) {
+      menuToggle.focus();
+    }
+  };
+
+  menuToggle?.addEventListener('click', () => {
+    const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+    setMenuOpen(!isOpen);
+  });
+
+  nav?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      setMenuOpen(false);
+    });
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (
+      event.key === 'Escape' &&
+      menuToggle?.getAttribute('aria-expanded') === 'true'
+    ) {
+      setMenuOpen(false, true);
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    if (
+      menuToggle?.getAttribute('aria-expanded') === 'true' &&
+      header &&
+      event.target instanceof Node &&
+      !header.contains(event.target)
+    ) {
+      setMenuOpen(false);
+    }
+  });
+
+  const desktopQuery = window.matchMedia('(min-width: 768px)');
+  desktopQuery.addEventListener('change', (event) => {
+    if (event.matches && menuToggle?.getAttribute('aria-expanded') === 'true') {
+      setMenuOpen(false);
+    }
+  });
+</script>

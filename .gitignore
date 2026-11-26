@@ -8,6 +8,9 @@ pnpm-debug.log*
 # Dependencies
 node_modules/
 
+# Astro cache and generated types
+.astro/
+
 # Production build
 dist/
 dist-ssr/
@@ -17,11 +20,6 @@ dist-ssr/
 .env.*
 !.env.example
 
-# Vite cache
-.vite/
-vite.config.js.timestamp-*
-vite.config.ts.timestamp-*
-
 # Local editor settings
 .vscode/*
 !.vscode/extensions.json
@@ -30,6 +28,9 @@ vite.config.ts.timestamp-*
 # OS files
 .DS_Store
 Thumbs.db
+
+# Local docs (ignored from commits)
+docs/
 
 # Misc
 *.local
