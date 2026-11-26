@@ -123,18 +123,16 @@ export const hero = {
 };
 
 export const sectionHeaders = {
-  about: { eyebrow: "About", heading: "About" },
-  experience: { eyebrow: "Experience", heading: "Experience" },
-  projects: { eyebrow: "Projects", heading: "Projects" },
-  skills: { eyebrow: "Skills", heading: "Skills" },
+  about: { heading: "About" },
+  experience: { heading: "Experience" },
+  projects: { heading: "Projects" },
+  skills: { heading: "Skills" },
   credentials: {
-    eyebrow: "Credentials",
     heading: "Certifications and Education",
   },
 } as const;
 
 export const about = {
-  eyebrow: sectionHeaders.about.eyebrow,
   heading: sectionHeaders.about.heading,
   paragraphs: [
     "I'm an Information Technology graduate based in Sri Lanka. I enjoy building web applications and solving technical problems, from writing the code to deploying and maintaining it.",
@@ -271,12 +269,12 @@ export const certifications: CertificationItem[] = [
     date: "Oct 2025",
   },
   {
-    title: "AWS Cloud Fundamentals (14 modules)",
+    title: "AWS Cloud Fundamentals",
     issuer: "AWS Training",
     date: "2025",
   },
   {
-    title: "Microsoft Azure Fundamentals (8 modules)",
+    title: "Microsoft Azure Fundamentals",
     issuer: "Microsoft Learn",
     date: "2025",
   },

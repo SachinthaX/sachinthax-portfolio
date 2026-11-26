@@ -3,7 +3,7 @@ import type { LanguageItem } from "../data/content";
 
 interface Props {
   id: string;
-  eyebrow: string;
+  eyebrow?: string;
   heading: string;
   paragraphs: string[];
   languages: LanguageItem[];
@@ -13,9 +13,9 @@ const { id, eyebrow, heading, paragraphs, languages } = Astro.props;
 ---
 
 <section id={id} class="section" aria-labelledby="about-heading">
-  <div class="container">
-    <div class="section-header">
-      <p class="eyebrow">{eyebrow}</p>
+  <div class="container about-grid">
+    <div class="section-header about-header">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
       <h2 id="about-heading" class="section-title">
         {heading}
       </h2>
@@ -46,9 +46,21 @@ const { id, eyebrow, heading, paragraphs, languages } = Astro.props;
 </section>
 
 <style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 2fr);
+    gap: var(--space-12);
+    align-items: center;
+  }
+
+  .about-header {
+    margin-bottom: 0;
+  }
+
   .about-body {
     display: grid;
     gap: var(--space-4);
+    min-width: 0;
   }
 
   .about-body p {
@@ -90,6 +102,18 @@ const { id, eyebrow, heading, paragraphs, languages } = Astro.props;
     display: inline-flex;
     align-items: baseline;
     gap: var(--space-2);
+  }
+
+  @media (max-width: 840px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+      align-items: start;
+    }
+
+    .about-body {
+      max-width: none;
+    }
   }
 
   @media (max-width: 640px) {

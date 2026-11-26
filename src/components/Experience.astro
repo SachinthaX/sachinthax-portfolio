@@ -3,7 +3,7 @@ import type { ExperienceItem } from "../data/content";
 
 interface Props {
   id: string;
-  eyebrow: string;
+  eyebrow?: string;
   heading: string;
   items: ExperienceItem[];
 }
@@ -14,7 +14,7 @@ const { id, eyebrow, heading, items } = Astro.props;
 <section id={id} class="section" aria-labelledby="experience-heading">
   <div class="container">
     <div class="section-header">
-      <p class="eyebrow">{eyebrow}</p>
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
       <h2 id="experience-heading" class="section-title">
         {heading}
       </h2>

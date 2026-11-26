@@ -111,13 +111,13 @@ html:not(.js) .js-only {
 
 /* Layout containers */
 .container {
-  width: min(var(--container-max), calc(100% - var(--space-8)));
+  width: min(var(--container-max), calc(100% - var(--space-12)));
   margin-inline: auto;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .container {
-    width: calc(100% - var(--space-6));
+    width: calc(100% - var(--space-8));
   }
 }
 
@@ -154,6 +154,18 @@ html:not(.js) .js-only {
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.02em;
+}
+
+.section-header .section-title {
+  display: inline-block;
+  max-width: 100%;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--border-control);
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+  border-radius: var(--radius-control);
+  background-color: var(--surface);
+  font-size: clamp(1.25rem, 2.2vw, 1.625rem);
+  line-height: 1.25;
 }
 
 /* Shared surface cards, chips, and buttons */
