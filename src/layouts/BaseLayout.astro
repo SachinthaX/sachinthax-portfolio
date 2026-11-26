@@ -7,6 +7,7 @@ import '../styles/tokens.css';
 import '../styles/global.css';
 import Navbar, { type NavLink } from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import { identity, navigation, siteMeta } from '../data/content';
 
 interface Props {
   title?: string;
@@ -21,45 +22,37 @@ interface Props {
 }
 
 const {
-  title = 'Nipuna Sachintha | Full-Stack Developer',
-  description = 'Portfolio of Nipuna Sachintha, an IT graduate and full-stack developer from Sri Lanka. Web applications, deployment, CI/CD, and cloud basics.',
-  canonical = 'https://www.sachinthax.live/',
-  ogImage = '/og-image.png',
-  ogImageAlt = 'Nipuna Sachintha — Full-Stack Developer',
+  title = siteMeta.title,
+  description = siteMeta.description,
+  canonical = siteMeta.canonical,
+  ogImage = siteMeta.ogImage,
+  ogImageAlt = siteMeta.ogImageAlt,
   noindex = false,
   includePersonSchema = true,
   brandHref = '#home',
-  navLinks = [
-    { label: 'About', href: '#about' },
-    { label: 'Experience', href: '#experience' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'Skills', href: '#skills' },
-    { label: 'Credentials', href: '#credentials' },
-    { label: 'Contact', href: '#contact' },
-  ],
+  navLinks = navigation,
 } = Astro.props;
 
 const absoluteOgImage = ogImage.startsWith('http')
   ? ogImage
-  : new URL(ogImage, canonical).toString();
+  : new URL(ogImage, siteMeta.canonical).toString();
+
+const [locality, countryName] = identity.location.split(',').map((s) => s.trim());
 
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'Nipuna Sachintha',
-  alternateName: 'SachinthaX',
-  jobTitle: 'Full-Stack Developer',
-  url: 'https://www.sachinthax.live/',
-  email: 'mailto:nipunasachintha77@gmail.com',
+  name: identity.name,
+  alternateName: identity.handle,
+  jobTitle: identity.role,
+  url: identity.siteUrl,
+  email: `mailto:${identity.email}`,
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Gampaha',
-    addressCountry: 'LK',
+    addressLocality: locality,
+    addressCountry: countryName === 'Sri Lanka' ? 'LK' : countryName,
   },
-  sameAs: [
-    'https://github.com/SachinthaX',
-    'https://www.linkedin.com/in/h-n-sachintha/',
-  ],
+  sameAs: [identity.github, identity.linkedin],
 };
 ---
 
@@ -107,16 +100,16 @@ const personSchema = {
       crossorigin
     />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={siteMeta.favicon} />
     <link rel="canonical" href={canonical} />
 
     <meta name="description" content={description} />
-    <meta name="author" content="Nipuna Sachintha" />
+    <meta name="author" content={identity.name} />
     <meta name="theme-color" content="#0b0f14" />
     {noindex && <meta name="robots" content="noindex" />}
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Nipuna Sachintha" />
+    <meta property="og:site_name" content={siteMeta.siteName} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
@@ -142,12 +135,12 @@ const personSchema = {
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <Navbar brandName="Nipuna Sachintha" brandHref={brandHref} links={navLinks} />
+    <Navbar brandName={identity.name} brandHref={brandHref} links={navLinks} />
 
     <main id="main-content">
       <slot />
     </main>
 
-    <Footer ownerName="Nipuna Sachintha" />
+    <Footer ownerName={identity.name} />
   </body>
 </html>

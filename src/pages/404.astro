@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { identity, navigation, siteMeta } from '../data/content';
+
+const rootLinks = navigation.map((item) => ({
+  label: item.label,
+  href: `/${item.href}`,
+}));
+---
+
+<BaseLayout
+  title={`404 — Page Not Found | ${identity.name}`}
+  description="The requested page could not be found."
+  canonical={`${siteMeta.canonical}404`}
+  noindex={true}
+  includePersonSchema={false}
+  brandHref="/"
+  navLinks={rootLinks}
+>
+  <section class="section not-found-section" aria-labelledby="not-found-heading">
+    <div class="container">
+      <div class="card prose not-found-card">
+        <p class="eyebrow">404</p>
+        <h1 id="not-found-heading" class="not-found-title">Page not found</h1>
+        <p class="not-found-text">
+          The page you are looking for does not exist or may have moved.
+        </p>
+        <a href="/" class="button button-primary">Back to home</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found-section {
+    padding-block: var(--space-20);
+  }
+
+  .not-found-card {
+    padding: var(--space-8);
+  }
+
+  .not-found-title {
+    margin-bottom: var(--space-3);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+
+  .not-found-text {
+    margin-bottom: var(--space-6);
+    color: var(--muted);
+  }
+</style>
