@@ -1,5 +1,5 @@
 ---
-import type { ProjectItem } from '../data/content';
+import type { ProjectItem } from "../data/content";
 
 interface Props {
   id: string;
@@ -15,22 +15,27 @@ const { id, eyebrow, heading, items } = Astro.props;
   <div class="container">
     <div class="section-header">
       <p class="eyebrow">{eyebrow}</p>
-      <h2 id="projects-heading" class="section-title">{heading}</h2>
+      <h2 id="projects-heading" class="section-title">
+        {heading}
+      </h2>
     </div>
 
     <div class="projects-grid">
-      {
-        items.map((project) => (
-          <article class="card card-interactive project-card">
-            <p class="project-subtitle">{project.subtitle}</p>
-            <h3 class="project-title">{project.title}</h3>
-            <p class="project-description">{project.description}</p>
-            <ul class="chip-list" aria-label={`Technologies used in ${project.title}`}>
-              {project.tech.map((tag) => <li class="chip">{tag}</li>)}
-            </ul>
-          </article>
-        ))
-      }
+      {items.map((project) => (
+        <article class="card card-interactive project-card">
+          <p class="project-subtitle">{project.subtitle}</p>
+          <h3 class="project-title">{project.title}</h3>
+          <p class="project-description">{project.description}</p>
+          <ul
+            class="chip-list"
+            aria-label={`Technologies used in ${project.title}`}
+          >
+            {project.tech.map((tag) => (
+              <li class="chip">{tag}</li>
+            ))}
+          </ul>
+        </article>
+      ))}
     </div>
   </div>
 </section>

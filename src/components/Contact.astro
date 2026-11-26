@@ -1,6 +1,6 @@
 ---
-import Icon from './Icon.astro';
-import type { Identity } from '../data/content';
+import Icon from "./Icon.astro";
+import type { Identity } from "../data/content";
 
 interface Props {
   id: string;
@@ -18,7 +18,9 @@ const { id, eyebrow, heading, text, identity } = Astro.props;
     <div class="card contact-card">
       <div class="contact-copy">
         <p class="eyebrow">{eyebrow}</p>
-        <h2 id="contact-heading" class="section-title">{heading}</h2>
+        <h2 id="contact-heading" class="section-title">
+          {heading}
+        </h2>
         <p class="contact-text prose">{text}</p>
       </div>
 
